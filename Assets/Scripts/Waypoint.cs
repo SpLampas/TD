@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Waypoint : MonoBehaviour
 {
@@ -18,11 +19,16 @@ public class Waypoint : MonoBehaviour
     
     void OnMouseDown()
     {
-        if (isPlacable)
+        if (!EventSystem.current.IsPointerOverGameObject() && isPlacable)
         {
             bool isPlaced =  towerPrefab.CreateTower(towerPrefab,transform.position);
             isPlacable = !isPlaced;
         }
+        // if (isPlacable)
+        // {
+        //     bool isPlaced =  towerPrefab.CreateTower(towerPrefab,transform.position);
+        //     isPlacable = !isPlaced;
+        // }
         
     }
 }
