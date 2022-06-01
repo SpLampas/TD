@@ -25,12 +25,12 @@ public class EnemyHealth : MonoBehaviour
         currentHitPoints = maxHitPoints;
     }
 
-    private void OnParticleCollision(GameObject other)
+    void OnParticleCollision(GameObject other)
     {
-        ProccessHit();
+        ProcessHit();
     }
 
-    void ProccessHit()
+    void ProcessHit()
     {
         currentHitPoints--;
         if (currentHitPoints <= 0)

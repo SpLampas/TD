@@ -21,14 +21,14 @@ public class Waypoint : MonoBehaviour
     {
         if (!EventSystem.current.IsPointerOverGameObject() && isPlacable)
         {
-            bool isPlaced =  towerPrefab.CreateTower(towerPrefab,transform.position);
+            var idex = 0;
+            bool isPlaced =  towerPrefab.CreateTower(towerPrefab,transform.position, idex);
             isPlacable = !isPlaced;
         }
-        // if (isPlacable)
+
+        // if (!EventSystem.current.IsPointerOverGameObject() && Tower.)
         // {
-        //     bool isPlaced =  towerPrefab.CreateTower(towerPrefab,transform.position);
-        //     isPlacable = !isPlaced;
+        //     
         // }
-        
     }
 }

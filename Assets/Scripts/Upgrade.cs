@@ -19,7 +19,7 @@ public class Upgrade : MonoBehaviour
     {
         if (isUpgradable && bank.CurrentBallance>= cost)
         {
-            bool isUpgratable =  towerPrefab.CreateTower(towerPrefab,transform.position);
+            // bool isUpgratable =  towerPrefab.CreateTower(towerPrefab,transform.position);
             // isUpgradable = !isPlaced;
         }
         
