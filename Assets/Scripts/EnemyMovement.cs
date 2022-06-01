@@ -44,12 +44,7 @@ public class EnemyMovement : MonoBehaviour
     {
         transform.position = path[0].transform.position;
     }
-
-    void FinishPath()
-    {
-        enemy.PenaltyGold();
-        gameObject.SetActive(false);
-    }
+    
     
     IEnumerator FollowPath()
     {
@@ -73,4 +68,9 @@ public class EnemyMovement : MonoBehaviour
         FinishPath();
     }
     
+    void FinishPath()
+    {
+        enemy.PenaltyGold();
+        gameObject.SetActive(false);
+    }
 }

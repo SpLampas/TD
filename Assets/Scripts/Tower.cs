@@ -23,4 +23,9 @@ public class Tower : MonoBehaviour
 
         return false;
     }
+
+    public bool UpgradeTower(Tower tower, Vector3 position)
+    {
+        return true;
+    }
 }

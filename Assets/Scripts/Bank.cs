@@ -11,6 +11,8 @@ public class Bank : MonoBehaviour
     [SerializeField] int startingBalance = 150;
     int currentBalance;
     [SerializeField] TextMeshProUGUI displayBalance;
+    
+    public static Action OnEmptyBank;
 
     void Awake()
     {
@@ -35,7 +37,9 @@ public class Bank : MonoBehaviour
         UpdateDisplay();
         if (currentBalance < 0)
         {
-            ReloadScene();
+            OnEmptyBank?.Invoke();
+            Time.timeScale = 0f;
+            // ReloadScene();
         }
     }
 
@@ -44,9 +48,5 @@ public class Bank : MonoBehaviour
         displayBalance.text = "Gold: " + currentBalance;
     }
     
-    void ReloadScene()
-    {
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.buildIndex);
-    }
+   
 }
