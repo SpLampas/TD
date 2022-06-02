@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tower : MonoBehaviour
+public class TowerManager : MonoBehaviour
 {
-    [SerializeField] int[] cost = new int[]{75,100};
+    [SerializeField] int[] cost = new int[] { 75, 100 };
 
     bool isUpgradeable;
-    
-    
+
+
     public bool CreateTower(Tower tower, Vector3 position, int index)
     {
         Bank bank = FindObjectOfType<Bank>();
@@ -30,5 +30,6 @@ public class Tower : MonoBehaviour
         }
 
         return false;
+
     }
 }

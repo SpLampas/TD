@@ -9,6 +9,8 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] int maxHitPoints = 5;
     [Tooltip("Adds amount to maxHitPoints when Enemy dies.")]
     [SerializeField] int difficulty = 1;
+
+    [SerializeField] GameObject coinParticle;
     
     int currentHitPoints = 0;
 
@@ -33,8 +35,9 @@ public class EnemyHealth : MonoBehaviour
     void ProcessHit()
     {
         currentHitPoints--;
-        if (currentHitPoints <= 0)
+        if (currentHitPoints == 0)
         {
+            coinParticle.SetActive(true);
             gameObject.SetActive(false);
             maxHitPoints += difficulty;
             enemy.RewardGold();

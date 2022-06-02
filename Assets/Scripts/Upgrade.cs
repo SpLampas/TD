@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Upgrade : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class Upgrade : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (isUpgradable && bank.CurrentBallance>= cost)
+        if (!EventSystem.current.IsPointerOverGameObject() && isUpgradable && bank.CurrentBallance>= cost)
         {
             // bool isUpgratable =  towerPrefab.CreateTower(towerPrefab,transform.position);
             // isUpgradable = !isPlaced;

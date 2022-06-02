@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class Waypoint : MonoBehaviour
 {
-    [SerializeField] Tower towerPrefab;
+    [SerializeField] Tower towerPrefab;//prepei na ginei pinakas
     
     [SerializeField] bool isPlacable;
     public bool IsPlaceable
@@ -16,7 +16,7 @@ public class Waypoint : MonoBehaviour
             return isPlacable;
         }
     }
-    
+    //isUpgradable opws pane
     void OnMouseDown()
     {
         if (!EventSystem.current.IsPointerOverGameObject() && isPlacable)
@@ -25,10 +25,9 @@ public class Waypoint : MonoBehaviour
             bool isPlaced =  towerPrefab.CreateTower(towerPrefab,transform.position, idex);
             isPlacable = !isPlaced;
         }
-
-        // if (!EventSystem.current.IsPointerOverGameObject() && Tower.)
-        // {
-        //     
-        // }
+        else if(!EventSystem.current.IsPointerOverGameObject() && !isPlacable)
+        {
+            Debug.Log("Yo");
+        }
     }
 }
