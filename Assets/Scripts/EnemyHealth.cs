@@ -12,7 +12,7 @@ public class EnemyHealth : MonoBehaviour
 
     [SerializeField] GameObject coinParticle;
     
-    int currentHitPoints = 0;
+    [SerializeField] int currentHitPoints = 0;
 
     Enemy enemy;
 

@@ -59,7 +59,7 @@ public class TargetLocator : MonoBehaviour
 
     void Attack(bool isActive)
     {
-        var emmisionModule = arrow.emission;
-        emmisionModule.enabled = isActive;
+        var emissionModule = arrow.emission;
+        emissionModule.enabled = isActive;
     }
 }
