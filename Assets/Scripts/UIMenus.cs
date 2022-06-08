@@ -10,12 +10,16 @@ public class UIMenus : MonoBehaviour
     [SerializeField] GameObject gameOver;
     [SerializeField] GameObject pause;
 
+    float slowdownFactor =0.05f;
+    float slowdownLength = 3f;
     void Awake()
     {
         Bank.OnEmptyBank += EmptyBankHandler;
         gameOver.SetActive(false);
+        Time.timeScale = 1f;
 
     }
+
 
     void OnDestroy()
     {
@@ -49,5 +53,19 @@ public class UIMenus : MonoBehaviour
         gameOver.SetActive(false);
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.buildIndex);
+    }
+
+    public void SlowMotion()
+    {
+        Time.timeScale = slowdownFactor;
+        Time.fixedDeltaTime = Time.timeScale * 0.02f;
+        StartCoroutine(ReturnToRealTime());
+    }
+
+    IEnumerator ReturnToRealTime()
+    {
+        Time.timeScale += (1f / slowdownLength) * Time.unscaledDeltaTime;
+        Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
+        yield return new WaitForEndOfFrame();
     }
 }
