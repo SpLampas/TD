@@ -31,15 +31,14 @@ public class Bank : MonoBehaviour
         UpdateDisplay();
     }
     
-    public void Withdraw(int ammount)
+    public void Withdraw(int amount)
     {
-        currentBalance -= Mathf.Abs(ammount);
+        currentBalance -= Mathf.Abs(amount);
         UpdateDisplay();
         if (currentBalance < 0)
         {
-            OnEmptyBank?.Invoke();
             Time.timeScale = 0f;
-            // ReloadScene();
+            OnEmptyBank?.Invoke();
         }
     }
 

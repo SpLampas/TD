@@ -481,7 +481,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 381617643}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 572520445}
+        m_TargetAssemblyTypeName: UIMenus, Assembly-CSharp
+        m_MethodName: SelectStage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &415352887
 GameObject:
   m_ObjectHideFlags: 0
@@ -1910,8 +1922,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 221.70886, y: 51.920227}
-  m_SizeDelta: {x: 398.4809, y: 103.8363}
+  m_AnchoredPosition: {x: 141.95438, y: 37.15448}
+  m_SizeDelta: {x: 238.9719, y: 74.3048}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3257713465798742370
 CanvasRenderer:

@@ -12,6 +12,12 @@ public class UIMenus : MonoBehaviour
 
     float slowdownFactor =0.05f;
     float slowdownLength = 3f;
+
+    private IEnumerator coroutine;
+
+    Bank bank;
+    int sloMoGoldPenalty = 50;
+    
     void Awake()
     {
         Bank.OnEmptyBank += EmptyBankHandler;
@@ -20,6 +26,10 @@ public class UIMenus : MonoBehaviour
 
     }
 
+    void Start()
+    {
+        bank = FindObjectOfType<Bank>();
+    }
 
     void OnDestroy()
     {
@@ -34,6 +44,7 @@ public class UIMenus : MonoBehaviour
     public void Pause()
     {
         pause.SetActive(true);
+        StopCoroutine(coroutine);
         Time.timeScale = 0f;
     }
 
@@ -59,13 +70,38 @@ public class UIMenus : MonoBehaviour
     {
         Time.timeScale = slowdownFactor;
         Time.fixedDeltaTime = Time.timeScale * 0.02f;
-        StartCoroutine(ReturnToRealTime());
+        coroutine = ReturnToRealTime(1f,2f);
+        StartCoroutine(coroutine);
+        if (bank == null)
+        {
+            return;
+        }
+        bank.Withdraw(sloMoGoldPenalty);
     }
 
-    IEnumerator ReturnToRealTime()
+    IEnumerator ReturnToRealTime(float lerpTimeTo,float timeToTake)
     {
-        Time.timeScale += (1f / slowdownLength) * Time.unscaledDeltaTime;
-        Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
-        yield return new WaitForEndOfFrame();
+        float endTime = Time.time + slowdownLength;
+        float startTimeScale = Time.timeScale;
+        float i = slowdownFactor;
+        while (Time.time < endTime)
+        {
+            i += (1f / timeToTake) * Time.unscaledDeltaTime; 
+            Time.timeScale = Mathf.Lerp(startTimeScale, lerpTimeTo, i); 
+            print(Time.timeScale);
+            yield return null;
+           
+        }
+        Time.timeScale = lerpTimeTo;
+        // Time.timeScale += (1f / slowdownLength) * Time.unscaledDeltaTime;
+        // Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
     }
+
+
+   public void SelectStage(int sceneIndex)
+   {
+       Time.timeScale = 0f;
+       SceneManager.LoadScene(sceneIndex);
+   }
+   
 }
