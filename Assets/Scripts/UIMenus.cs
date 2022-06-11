@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class UIMenus : MonoBehaviour
 {
-    [SerializeField] GameObject UI;
     [SerializeField] GameObject gameOver;
     [SerializeField] GameObject pause;
+    [SerializeField] GameObject levelSelector;
 
     float slowdownFactor =0.05f;
     float slowdownLength = 3f;
@@ -21,7 +21,6 @@ public class UIMenus : MonoBehaviour
     void Awake()
     {
         Bank.OnEmptyBank += EmptyBankHandler;
-        gameOver.SetActive(false);
         Time.timeScale = 1f;
 
     }
@@ -44,7 +43,6 @@ public class UIMenus : MonoBehaviour
     public void Pause()
     {
         pause.SetActive(true);
-        StopCoroutine(coroutine);
         Time.timeScale = 0f;
     }
 
@@ -86,9 +84,13 @@ public class UIMenus : MonoBehaviour
         float i = slowdownFactor;
         while (Time.time < endTime)
         {
+            if (pause.activeInHierarchy || levelSelector.activeInHierarchy)
+            {
+                yield break;
+            }
             i += (1f / timeToTake) * Time.unscaledDeltaTime; 
             Time.timeScale = Mathf.Lerp(startTimeScale, lerpTimeTo, i); 
-            print(Time.timeScale);
+            // print(Time.timeScale);
             yield return null;
            
         }
@@ -98,10 +100,29 @@ public class UIMenus : MonoBehaviour
     }
 
 
-   public void SelectStage(int sceneIndex)
+    public void SelectStage()
+    {
+        levelSelector.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    public void CloseTab()
    {
-       Time.timeScale = 0f;
-       SceneManager.LoadScene(sceneIndex);
+       levelSelector.SetActive(false);
+       Time.timeScale = 1f;
    }
-   
+
+    public void LoadStage(int sceneIndex)
+    {
+        SceneManager.LoadScene(sceneIndex);
+    }
+
+
+    public void NextLevel()
+    {
+        //MOLIS PATAEI TO KOUMPI (VGAINEI MIA XONTRI LUL) 
+        //SceneManager.LoadScene(sceneIndex + 1);
+    }
+
+    
 }

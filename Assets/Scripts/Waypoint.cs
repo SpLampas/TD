@@ -6,9 +6,13 @@ using UnityEngine.EventSystems;
 
 public class Waypoint : MonoBehaviour
 {
-    [SerializeField] Tower towerPrefab;//prepei na ginei pinakas
+    [SerializeField] Tower[] towerPrefab;//prepei na ginei pinakas
+    
+    private List<GameObject> towersActive = new List<GameObject>();
     
     [SerializeField] bool isPlacable;
+
+    int index;
     public bool IsPlaceable
     {
         get
@@ -16,18 +20,18 @@ public class Waypoint : MonoBehaviour
             return isPlacable;
         }
     }
-    //isUpgradable opws pane
     void OnMouseDown()
     {
         if (!EventSystem.current.IsPointerOverGameObject() && isPlacable)
         {
-            var idex = 0;
-            bool isPlaced =  towerPrefab.CreateTower(towerPrefab,transform.position, idex);
+            index = 0;
+            bool isPlaced =  towerPrefab[index].CreateTower(towerPrefab[index],transform.position, index);
             isPlacable = !isPlaced;
+            // prosthetw sthn lista to towerPrefab[index] to thema einai ap...
+            // Mhpws na kanw ena create manager kserw gw h kati ttoio
+            // kai na yparxoyn ekei oles oi plirofories gia ta towers pou briskontai poio index exoun ktl
+            // kalo, tha to skeftw 
         }
-        else if(!EventSystem.current.IsPointerOverGameObject() && !isPlacable)
-        {
-            Debug.Log("Yo");
-        }
+        
     }
 }

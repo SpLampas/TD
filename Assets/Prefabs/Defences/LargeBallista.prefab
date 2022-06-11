@@ -4991,6 +4991,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6843444001368898168}
   - component: {fileID: 457413961}
+  - component: {fileID: 934444926819870245}
   m_Layer: 0
   m_Name: LargeBallista
   m_TagString: Untagged
@@ -5029,3 +5030,16 @@ MonoBehaviour:
   weapon: {fileID: 1474987401}
   towerRange: 30
   arrow: {fileID: 1682230771}
+--- !u!114 &934444926819870245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6175311001524543682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ef31389351214b5d96ffea9f19b0382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 4b00000064000000

@@ -8,7 +8,7 @@ public class ObjectPool : MonoBehaviour
     [SerializeField] GameObject[] enemyprefab;
     [SerializeField][Range(0.1f, 30f)] float spawnTimer = 1f;
     [SerializeField][Range(0,50)] int poolSize = 5;
-    [SerializeField] [Range(1f, 3f)] float timeBetweenWaves = 1f; 
+    // [SerializeField] [Range(1f, 3f)] float timeBetweenWaves = 1f; 
     float countDown;//time until first wave starts
     
     GameObject[] pool;
@@ -47,6 +47,8 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
+    //prepei na allaxtoun h panw kai h katw
+    
     void EnableObjectInPool()
     {
         for (int i = 0; i < pool.Length; i++)

@@ -16,8 +16,27 @@ public class Bank : MonoBehaviour
 
     void Awake()
     {
+        DefenceInfo.OnUpgrade += UpgradeHandler;
         currentBalance = startingBalance;
         UpdateDisplay();
+    }
+
+    private void OnDestroy()
+    {
+        DefenceInfo.OnUpgrade -= UpgradeHandler;
+    }
+
+    void UpgradeHandler(int i, int amount)
+    {
+        if (i == 0)
+        {
+            //upgrade => withdraw
+        }
+
+        if (i == 1)
+        {
+            //sell => deposit
+        }
     }
 
     public int CurrentBallance

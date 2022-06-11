@@ -5,21 +5,14 @@ using UnityEngine;
 public class Tower : MonoBehaviour
 {
     [SerializeField] int[] cost = new int[]{75,100};
+    
 
-    bool isUpgradeable;
-    
-    
     public bool CreateTower(Tower tower, Vector3 position, int index)
     {
         Bank bank = FindObjectOfType<Bank>();
         if (bank == null)
         {
             return false;
-        }
-
-        if (index == 0)
-        {
-            isUpgradeable = true;
         }
 
         if (bank.CurrentBallance >= cost[index])
