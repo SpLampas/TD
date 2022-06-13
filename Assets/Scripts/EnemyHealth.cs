@@ -19,8 +19,8 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] Image healthBar;
     
     Enemy enemy;
-
-
+    public static Action<int> OnDeath;
+    
     void Start()
     {
         enemy = GetComponent<Enemy>();
@@ -29,7 +29,7 @@ public class EnemyHealth : MonoBehaviour
 
     void OnEnable()
     {
-        currentHitPoints = maxHitPoints;
+        currentHitPoints = maxHitPoints; ;
         healthBar.fillAmount = 1f;
     }
 
@@ -49,8 +49,13 @@ public class EnemyHealth : MonoBehaviour
             coinParticle.Play();
             coinParticle.transform.SetParent(null,true);
             gameObject.SetActive(false);
-            maxHitPoints += difficulty;
+
+            var deadEnemy = -1;
+            OnDeath?.Invoke(deadEnemy);
+            
+            // maxHitPoints += difficulty; //??? μαλλον πρεπει να γινεται αλλου gia na exei sxesh me to wave
             enemy.RewardGold();
         }
     }
+    
 }

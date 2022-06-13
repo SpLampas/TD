@@ -8,59 +8,101 @@ public class ObjectPool : MonoBehaviour
     [SerializeField] GameObject[] enemyprefab;
     [SerializeField][Range(0.1f, 30f)] float spawnTimer = 1f;
     [SerializeField][Range(0,50)] int poolSize = 5;
-    // [SerializeField] [Range(1f, 3f)] float timeBetweenWaves = 1f; 
-    float countDown;//time until first wave starts
     
-    GameObject[] pool;
+    [SerializeField] [Range(1f, 10f)] float timeBetweenWaves = 1f; 
+    
 
+    List<GameObject> tempPool = new List<GameObject>();
+
+    int waveCount = 1;
     
-    
+    int activeInSceneCount;
+ 
     void Awake()
     {
-        PopulatePool();
+        PopulatePool(poolSize);
+        EnemyHealth.OnDeath += OnDeathHandler;
     }
 
-    
+    void OnDestroy()
+    {
+        EnemyHealth.OnDeath -= OnDeathHandler;
+    }
+
+    void OnDeathHandler(int deathCount)
+    {
+        activeInSceneCount += deathCount;
+        if (activeInSceneCount == 0)
+        {
+            StartCoroutine(PrepareForWave());
+        }
+    }
+
+   
     void Start()
     {
         StartCoroutine(SpawnEnemy());
+        activeInSceneCount = poolSize;
     }
 
-    
-    
-    void PopulatePool()
+ 
+    void PopulatePool( int tempPoolSize)
     {
-        pool = new GameObject[poolSize];
-        for (int i = 0; i < pool.Length; i++)
+        for (int i = 0; i < tempPoolSize; i++)
         {
-            pool[i] = Instantiate(enemyprefab[0], transform);
-            pool[i].SetActive(false);
+            var tempEnemy= Instantiate(enemyprefab[0], transform);
+            tempEnemy.SetActive(false);
+            tempPool.Add(tempEnemy);
         }
     }
-    
+
+
     IEnumerator SpawnEnemy()
     {
-        while (true)
+      
+        for (int i = 0; i < tempPool.Count; i++)
         {
-            EnableObjectInPool();
+            tempPool[i].SetActive(true);
             yield return new WaitForSeconds(spawnTimer);
         }
     }
 
-    //prepei na allaxtoun h panw kai h katw
-    
-    void EnableObjectInPool()
+   
+    IEnumerator PrepareForWave()
     {
-        for (int i = 0; i < pool.Length; i++)
-        {
-            if (pool[i].activeInHierarchy == false)
-            {
-                pool[i].SetActive(true);
-                return;
-            }
-        }
+        //gameobject 3,2,1 setActive(true);
+        yield return new WaitForSeconds(timeBetweenWaves);
+        StartWave();
     }
     
+     
+
+    void StartWave()
+    {
+        //gameobject 3,2,1 setActive(false);
+        waveCount++;
+        poolSize += 5;
+        tempPool.Clear();
+        PopulatePool(poolSize);
+        StartCoroutine(SpawnEnemy());
+        activeInSceneCount = poolSize;
+        
+    }
+
+
+    
+    
+    // void EnableObjectInPool()
+    // {
+    //     for (int i = 0; i < pool.Length; i++)
+    //     {
+    //         if (pool[i].activeInHierarchy == false)
+    //         {
+    //             pool[i].SetActive(true);
+    //             return;
+    //         }
+    //     }
+    // }
     
   
 }
