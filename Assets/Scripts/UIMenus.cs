@@ -3,17 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class UIMenus : MonoBehaviour
 {
     [SerializeField] GameObject gameOver;
     [SerializeField] GameObject pause;
     [SerializeField] GameObject levelSelector;
+    [SerializeField] GameObject stageCleared;
+    [SerializeField] GameObject waves;
+    [SerializeField] TextMeshProUGUI displayWave;
 
     float slowdownFactor =0.05f;
     float slowdownLength = 3f;
 
-    private IEnumerator coroutine;
+    IEnumerator coroutine;
 
     Bank bank;
     int sloMoGoldPenalty = 50;
@@ -21,6 +25,8 @@ public class UIMenus : MonoBehaviour
     void Awake()
     {
         Bank.OnEmptyBank += EmptyBankHandler;
+        ObjectPool.OnNewWave += NewWaveHandler;
+        ObjectPool.OnStageClear += StageClearHandler;
         Time.timeScale = 1f;
 
     }
@@ -33,11 +39,18 @@ public class UIMenus : MonoBehaviour
     void OnDestroy()
     {
         Bank.OnEmptyBank -= EmptyBankHandler;
+        ObjectPool.OnNewWave -= NewWaveHandler;
+        ObjectPool.OnStageClear -= StageClearHandler;
     }
 
     void EmptyBankHandler()
     {
         gameOver.SetActive(true);
+    }
+
+    void StageClearHandler()
+    {
+        stageCleared.SetActive(true);
     }
 
     public void Pause()
@@ -112,17 +125,30 @@ public class UIMenus : MonoBehaviour
        Time.timeScale = 1f;
    }
 
-    public void LoadStage(int sceneIndex)
+    public void LoadStage(string sceneName)
     {
-        SceneManager.LoadScene(sceneIndex);
+        SceneManager.LoadScene(sceneName);
     }
 
 
     public void NextLevel()
     {
-        //MOLIS PATAEI TO KOUMPI (VGAINEI MIA XONTRI LUL) 
-        //SceneManager.LoadScene(sceneIndex + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+
+    void NewWaveHandler(int waveCount, float timeBetweenWaves)
+    {
+        var waveNumber = waveCount + 1;
+        StartCoroutine(DisplayNewWaves(waveNumber,timeBetweenWaves));
+    }
+
+    IEnumerator DisplayNewWaves(int waveNumber, float timeBetweenWaves)
+    {
+        waves.gameObject.SetActive(true);
+        displayWave.text = "Wave: " + waveNumber;
+        yield return new WaitForSeconds(timeBetweenWaves);
+        waves.gameObject.SetActive(false);
+    }
     
 }

@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Transactions;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ObjectPool : MonoBehaviour
 {
@@ -9,14 +11,24 @@ public class ObjectPool : MonoBehaviour
     [SerializeField][Range(0.1f, 30f)] float spawnTimer = 1f;
     [SerializeField][Range(0,50)] int poolSize = 5;
     
-    [SerializeField] [Range(1f, 10f)] float timeBetweenWaves = 1f; 
-    
+    [SerializeField] [Range(1f, 10f)] float timeBetweenWaves = 1f;
 
-    List<GameObject> tempPool = new List<GameObject>();
+    [SerializeField] [Range(0, 100)] float enemy1Percentage;
+    [SerializeField] [Range(0, 100)] float enemy2Percentage;
+    [SerializeField] [Range(0, 100)] float enemy3Percentage;
+
+    [SerializeField] int winCondition = 5;
+
+    List<GameObject> pool = new List<GameObject>();
 
     int waveCount = 1;
     
     int activeInSceneCount;
+
+    IEnumerator prepareForWave;
+
+    public static Action<int, float> OnNewWave;
+    public static Action OnStageClear;
  
     void Awake()
     {
@@ -34,7 +46,8 @@ public class ObjectPool : MonoBehaviour
         activeInSceneCount += deathCount;
         if (activeInSceneCount == 0)
         {
-            StartCoroutine(PrepareForWave());
+            prepareForWave = PrepareForWave();
+            StartCoroutine(prepareForWave);
         }
     }
 
@@ -46,23 +59,40 @@ public class ObjectPool : MonoBehaviour
     }
 
  
-    void PopulatePool( int tempPoolSize)
+    void PopulatePool( int poolSize)
     {
-        for (int i = 0; i < tempPoolSize; i++)
+        var per1 = Mathf.Ceil(poolSize * (enemy1Percentage/100));
+        var per2 = Mathf.Ceil(poolSize * (enemy2Percentage/100));
+        var per3 = Mathf.Ceil(poolSize * (enemy3Percentage/100));
+        
+        
+        for (int i = 0; i < per1; i++)
         {
             var tempEnemy= Instantiate(enemyprefab[0], transform);
             tempEnemy.SetActive(false);
-            tempPool.Add(tempEnemy);
+            pool.Add(tempEnemy);
+        }
+        for (int i = 0; i < per2; i++)
+        {
+            var tempEnemy= Instantiate(enemyprefab[1], transform);
+            tempEnemy.SetActive(false);
+            pool.Add(tempEnemy);
+        }
+        for (int i = 0; i < per3; i++)
+        {
+            var tempEnemy= Instantiate(enemyprefab[2], transform);
+            tempEnemy.SetActive(false);
+            pool.Add(tempEnemy);
         }
     }
 
 
     IEnumerator SpawnEnemy()
     {
-      
-        for (int i = 0; i < tempPool.Count; i++)
+        
+        for (int i = 0; i < pool.Count; i++)
         {
-            tempPool[i].SetActive(true);
+            pool[i].SetActive(true);
             yield return new WaitForSeconds(spawnTimer);
         }
     }
@@ -70,7 +100,12 @@ public class ObjectPool : MonoBehaviour
    
     IEnumerator PrepareForWave()
     {
-        //gameobject 3,2,1 setActive(true);
+        if (waveCount == winCondition)
+        {
+            OnStageClear?.Invoke();
+            StopCoroutine(prepareForWave);
+        }
+        OnNewWave?.Invoke(waveCount, timeBetweenWaves);
         yield return new WaitForSeconds(timeBetweenWaves);
         StartWave();
     }
@@ -79,11 +114,13 @@ public class ObjectPool : MonoBehaviour
 
     void StartWave()
     {
-        //gameobject 3,2,1 setActive(false);
+        //PREPEI NA AUKSANEI TO DIFFICULTY
+        //(DEN EINAI ANAGKH DIFFICULTY = PARAPANW ZWH, ----> PAROLAYTA PREPEI NA AUKSISW TIN ARXIKH ZWH GIA BALANCE
+        //THA TO KANW WSTE DIFFICULTY PERISSOTEROI EXTHROI KAI DIAFOTERIKOY TYPOU)
         waveCount++;
-        poolSize += 5;
-        tempPool.Clear();
-        PopulatePool(poolSize);
+        poolSize += 5; //DIFFICULTY ++
+        pool.Clear();
+        PopulatePool(poolSize); 
         StartCoroutine(SpawnEnemy());
         activeInSceneCount = poolSize;
         

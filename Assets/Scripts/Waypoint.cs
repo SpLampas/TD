@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class Waypoint : MonoBehaviour
 {
-    [SerializeField] Tower[] towerPrefab;//prepei na ginei pinakas
+    [SerializeField] Tower[] towerPrefab;
     
     private List<GameObject> towersActive = new List<GameObject>();
     
