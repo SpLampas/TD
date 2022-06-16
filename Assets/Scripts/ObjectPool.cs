@@ -61,9 +61,9 @@ public class ObjectPool : MonoBehaviour
  
     void PopulatePool( int poolSize)
     {
-        var per1 = Mathf.Ceil(poolSize * (enemy1Percentage/100));
-        var per2 = Mathf.Ceil(poolSize * (enemy2Percentage/100));
-        var per3 = Mathf.Ceil(poolSize * (enemy3Percentage/100));
+        var per1 = Mathf.RoundToInt(poolSize * (enemy1Percentage/100));
+        var per2 = Mathf.RoundToInt(poolSize * (enemy2Percentage/100));
+        var per3 = Mathf.RoundToInt(poolSize * (enemy3Percentage/100));
         
         
         for (int i = 0; i < per1; i++)

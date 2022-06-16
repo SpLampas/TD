@@ -20140,7 +20140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6596151953931232161, guid: 7420bdc04d9a6451581cf2e245825f7a, type: 3}
       propertyPath: poolSize
-      value: 17
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6596151953931232161, guid: 7420bdc04d9a6451581cf2e245825f7a, type: 3}
       propertyPath: spawnTimer
@@ -20148,7 +20148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6596151953931232161, guid: 7420bdc04d9a6451581cf2e245825f7a, type: 3}
       propertyPath: winCondition
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6596151953931232161, guid: 7420bdc04d9a6451581cf2e245825f7a, type: 3}
       propertyPath: enemy1Percentage

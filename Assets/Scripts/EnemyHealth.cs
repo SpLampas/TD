@@ -45,9 +45,10 @@ public class EnemyHealth : MonoBehaviour
 
         if (currentHitPoints == 0)
         {
-            // coinParticle.gameObject.SetActive(true);
-            // coinParticle.Play();
-            // coinParticle.transform.SetParent(null,true);
+            coinParticle.gameObject.SetActive(true);
+            coinParticle.Play();
+            coinParticle.transform.SetParent(null,true);
+            Destroy(coinParticle.gameObject,2f);
             
             gameObject.SetActive(false);
 
