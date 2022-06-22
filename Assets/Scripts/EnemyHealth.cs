@@ -9,9 +9,7 @@ using UnityEngine.UI;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] int maxHitPoints = 5;
-    // [Tooltip("Adds amount to maxHitPoints when Enemy dies.")]
-    // [SerializeField] int difficulty = 1;
-
+    
     [SerializeField,ReadOnly] ParticleSystem coinParticle;
     
     [SerializeField] int currentHitPoints;
@@ -19,8 +17,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] Image healthBar;
     
     Enemy enemy;
-    public static Action<int> OnDeath;
-    
+
     void Start()
     {
         enemy = GetComponent<Enemy>();
@@ -52,9 +49,8 @@ public class EnemyHealth : MonoBehaviour
             
             gameObject.SetActive(false);
 
-            var deadEnemy = -1;
-            OnDeath?.Invoke(deadEnemy);
-            
+            var deadEnemy = 1;
+            Actions.OnDeath(deadEnemy);
             // maxHitPoints += difficulty; //??? μαλλον πρεπει να γινεται αλλου gia na exei sxesh me to wave
             enemy.RewardGold(); 
         }

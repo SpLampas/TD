@@ -6,14 +6,14 @@ public class GameOver : MonoBehaviour
 {
     void Awake()
     {
-        Bank.OnEmptyBank += EmptyBankHandler;
+        Actions.OnEmptyBank += EmptyBankHandler;
         gameObject.SetActive(false);
 
     }
 
     void OnDestroy()
     {
-        Bank.OnEmptyBank -= EmptyBankHandler;
+        Actions.OnEmptyBank -= EmptyBankHandler;
     }
 
     void EmptyBankHandler()

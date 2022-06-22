@@ -24,9 +24,10 @@ public class UIMenus : MonoBehaviour
     
     void Awake()
     {
-        Bank.OnEmptyBank += EmptyBankHandler;
-        ObjectPool.OnNewWave += NewWaveHandler;
-        ObjectPool.OnStageClear += StageClearHandler;
+        Actions.OnEmptyBank += EmptyBankHandler;
+        Actions.OnNewWave += NewWaveHandler;
+        Actions.OnStageClear += StageClearHandler;
+        Actions.OnEnemyReached += EnemyReachedHandler;
         Time.timeScale = 1f;
 
     }
@@ -38,9 +39,10 @@ public class UIMenus : MonoBehaviour
 
     void OnDestroy()
     {
-        Bank.OnEmptyBank -= EmptyBankHandler;
-        ObjectPool.OnNewWave -= NewWaveHandler;
-        ObjectPool.OnStageClear -= StageClearHandler;
+        Actions.OnEmptyBank -= EmptyBankHandler;
+        Actions.OnNewWave -= NewWaveHandler;
+        Actions.OnStageClear -= StageClearHandler;
+        Actions.OnEnemyReached -= EnemyReachedHandler;
     }
 
     void EmptyBankHandler()
@@ -53,6 +55,12 @@ public class UIMenus : MonoBehaviour
         stageCleared.SetActive(true);
     }
 
+    void EnemyReachedHandler()
+    {
+        gameOver.SetActive(true);
+        Time.timeScale = 0f;
+    }
+    
     public void Pause()
     {
         pause.SetActive(true);
@@ -67,6 +75,7 @@ public class UIMenus : MonoBehaviour
     
     public void QuitApp()
     {
+        PlayerPrefs.SetInt("LastStage", SceneManager.GetActiveScene().buildIndex);
         Application.Quit();
     }
     
@@ -140,7 +149,11 @@ public class UIMenus : MonoBehaviour
     void NewWaveHandler(int waveCount, float timeBetweenWaves)
     {
         var waveNumber = waveCount + 1;
-        StartCoroutine(DisplayNewWaves(waveNumber,timeBetweenWaves));
+        if (bank.CurrentBallance >= 0)
+        {
+            StartCoroutine(DisplayNewWaves(waveNumber,timeBetweenWaves));
+        }
+       
     }
 
     IEnumerator DisplayNewWaves(int waveNumber, float timeBetweenWaves)

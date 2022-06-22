@@ -8,46 +8,64 @@ using Random = UnityEngine.Random;
 public class ObjectPool : MonoBehaviour
 {
     [SerializeField] GameObject[] enemyprefab;
+    // [Tooltip("Adds amount to maxHitPoints when Enemy dies.")]
     [SerializeField][Range(0.1f, 30f)] float spawnTimer = 1f;
+    // [Tooltip("Adds amount to maxHitPoints when Enemy dies.")]
     [SerializeField][Range(0,50)] int poolSize = 5;
-    
+    // [Tooltip("Adds amount to maxHitPoints when Enemy dies.")]
     [SerializeField] [Range(1f, 10f)] float timeBetweenWaves = 1f;
 
     [SerializeField] [Range(0, 100)] float enemy1Percentage;
     [SerializeField] [Range(0, 100)] float enemy2Percentage;
     [SerializeField] [Range(0, 100)] float enemy3Percentage;
-
-    [SerializeField] int winCondition = 5;
-
+    
+// [Tooltip("Adds amount to maxHitPoints when Enemy dies.")]
+    [SerializeField] [Range(0, 10)] int winCondition = 5;
+    // [Tooltip("Adds amount to maxHitPoints when Enemy dies.")]
+    [SerializeField] [Range(0, 10)] int extraEnemiesPerWave = 5;
+    // [Tooltip("Adds amount to maxHitPoints when Enemy dies.")]
+    [SerializeField] [Range(0, 1)] float looseCondition = 0.7f;
+    
     List<GameObject> pool = new List<GameObject>();
 
     int waveCount = 1;
     
     int activeInSceneCount;
+    int enemyReachedEnd = 0;
+    int deadEnemy = 0;
 
     IEnumerator prepareForWave;
-
-    public static Action<int, float> OnNewWave;
-    public static Action OnStageClear;
- 
+    
+    
     void Awake()
     {
         PopulatePool(poolSize);
-        EnemyHealth.OnDeath += OnDeathHandler;
+        Actions.OnDeath += OnDeathHandler;
     }
 
     void OnDestroy()
     {
-        EnemyHealth.OnDeath -= OnDeathHandler;
+        Actions.OnDeath -= OnDeathHandler;
     }
 
     void OnDeathHandler(int deathCount)
     {
-        activeInSceneCount += deathCount;
+        if (deathCount == 0)
+        {
+            enemyReachedEnd++;
+        }
+        
+        activeInSceneCount--;
+     
         if (activeInSceneCount == 0)
         {
             prepareForWave = PrepareForWave();
             StartCoroutine(prepareForWave);
+        }
+
+        if (enemyReachedEnd >= looseCondition * poolSize)
+        {
+            Actions.OnEnemyReached();
         }
     }
 
@@ -84,6 +102,7 @@ public class ObjectPool : MonoBehaviour
             tempEnemy.SetActive(false);
             pool.Add(tempEnemy);
         }
+        
     }
 
 
@@ -92,9 +111,19 @@ public class ObjectPool : MonoBehaviour
         
         for (int i = 0; i < pool.Count; i++)
         {
-            pool[i].SetActive(true);
+            if (!pool[i].activeInHierarchy)
+            {
+                pool[i].SetActive(true);
+            }
+            
             yield return new WaitForSeconds(spawnTimer);
         }
+
+        // foreach (var enemy in pool)
+        // {
+        //     enemy.SetActive(true);
+        //     yield return new WaitForSeconds(spawnTimer);
+        // }
     }
 
    
@@ -102,10 +131,10 @@ public class ObjectPool : MonoBehaviour
     {
         if (waveCount == winCondition)
         {
-            OnStageClear?.Invoke();
+            Actions.OnStageClear();
             StopCoroutine(prepareForWave);
         }
-        OnNewWave?.Invoke(waveCount, timeBetweenWaves);
+        Actions.OnNewWave(waveCount, timeBetweenWaves);
         yield return new WaitForSeconds(timeBetweenWaves);
         StartWave();
     }
@@ -114,11 +143,9 @@ public class ObjectPool : MonoBehaviour
 
     void StartWave()
     {
-        //PREPEI NA AUKSANEI TO DIFFICULTY
-        //(DEN EINAI ANAGKH DIFFICULTY = PARAPANW ZWH, ----> PAROLAYTA PREPEI NA AUKSISW TIN ARXIKH ZWH GIA BALANCE
-        //THA TO KANW WSTE DIFFICULTY PERISSOTEROI EXTHROI KAI DIAFOTERIKOY TYPOU)
+        enemyReachedEnd = 0;
         waveCount++;
-        poolSize += 5; //DIFFICULTY ++
+        poolSize += extraEnemiesPerWave;
         pool.Clear();
         PopulatePool(poolSize); 
         StartCoroutine(SpawnEnemy());

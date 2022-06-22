@@ -12,7 +12,6 @@ public class Bank : MonoBehaviour
     int currentBalance;
     [SerializeField] TextMeshProUGUI displayBalance;
     
-    public static Action OnEmptyBank;
 
     void Awake()
     {
@@ -57,7 +56,7 @@ public class Bank : MonoBehaviour
         if (currentBalance < 0)
         {
             Time.timeScale = 0f;
-            OnEmptyBank?.Invoke();
+            Actions.OnEmptyBank();
         }
     }
 

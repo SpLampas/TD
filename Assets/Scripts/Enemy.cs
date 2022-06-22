@@ -9,9 +9,6 @@ public class Enemy : MonoBehaviour
 
     Bank bank;
     
-    
-    //AYTO TO SCRIPT PREPEI NA ALLAKSEI WSTE KANEI ASSIGN TO REWARD KAI TO PENALTY ANALOGA ME TO POION ENEMY EXOUME
-    //PWS THA TO KANOW OMWS RE BRONX...
 
     void Start()
     {

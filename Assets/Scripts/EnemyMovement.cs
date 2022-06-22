@@ -10,7 +10,8 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField][Range(0f,5f)] float speed = 1f;
 
     Enemy enemy;
-
+    
+    
     private void Start()
     {
         enemy = GetComponent<Enemy>();
@@ -66,11 +67,15 @@ public class EnemyMovement : MonoBehaviour
         }
         
         FinishPath();
+        
+        
     }
     
     void FinishPath()
     {
         enemy.PenaltyGold();
+        var deadEnemy = 0;
+        Actions.OnDeath(deadEnemy);
         gameObject.SetActive(false);
     }
 }
