@@ -12,6 +12,7 @@ public class UIMenus : MonoBehaviour
     [SerializeField] GameObject levelSelector;
     [SerializeField] GameObject stageCleared;
     [SerializeField] GameObject waves;
+    [SerializeField] GameObject notEnoughGold;
     [SerializeField] TextMeshProUGUI displayWave;
 
     float slowdownFactor =0.05f;
@@ -28,6 +29,7 @@ public class UIMenus : MonoBehaviour
         Actions.OnNewWave += NewWaveHandler;
         Actions.OnStageClear += StageClearHandler;
         Actions.OnEnemyReached += EnemyReachedHandler;
+        Actions.OnNotEnoughGold += NotEnoughGoldHandler;
         Time.timeScale = 1f;
 
     }
@@ -43,6 +45,7 @@ public class UIMenus : MonoBehaviour
         Actions.OnNewWave -= NewWaveHandler;
         Actions.OnStageClear -= StageClearHandler;
         Actions.OnEnemyReached -= EnemyReachedHandler;
+        Actions.OnNotEnoughGold -= NotEnoughGoldHandler;
     }
 
     void EmptyBankHandler()
@@ -79,7 +82,7 @@ public class UIMenus : MonoBehaviour
         Application.Quit();
     }
     
-    public  void Retry()
+    public void Retry()
     {
         gameOver.SetActive(false);
         Scene currentScene = SceneManager.GetActiveScene();
@@ -162,6 +165,11 @@ public class UIMenus : MonoBehaviour
         displayWave.text = "Wave: " + waveNumber;
         yield return new WaitForSeconds(timeBetweenWaves);
         waves.gameObject.SetActive(false);
+    }
+
+    void NotEnoughGoldHandler()
+    {
+        notEnoughGold.SetActive(true);
     }
     
 }

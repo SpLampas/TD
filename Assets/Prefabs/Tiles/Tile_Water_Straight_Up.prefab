@@ -13,11 +13,27 @@ PrefabInstance:
       objectReference: {fileID: -2432090755550338912, guid: cdf72d6b092b7d74cbcba07dd2c5aa58, type: 3}
     - target: {fileID: 4382219661574025943, guid: d39e05317ea4345a69eb92206789cb65, type: 3}
       propertyPath: m_Name
-      value: Tile_Water_Straight
+      value: Tile_Water_Straight_Up
       objectReference: {fileID: 0}
     - target: {fileID: 4874410305163587933, guid: d39e05317ea4345a69eb92206789cb65, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4874410305163587933, guid: d39e05317ea4345a69eb92206789cb65, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4874410305163587933, guid: d39e05317ea4345a69eb92206789cb65, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4874410305163587933, guid: d39e05317ea4345a69eb92206789cb65, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4874410305163587933, guid: d39e05317ea4345a69eb92206789cb65, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4286611584
       objectReference: {fileID: 0}
     - target: {fileID: 5074348741403041059, guid: d39e05317ea4345a69eb92206789cb65, type: 3}
       propertyPath: m_RootOrder
@@ -61,6 +77,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5074348741403041059, guid: d39e05317ea4345a69eb92206789cb65, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6786324197327654872, guid: d39e05317ea4345a69eb92206789cb65, type: 3}
+      propertyPath: isPlacable
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -11,31 +11,19 @@ public class Bank : MonoBehaviour
     [SerializeField] int startingBalance = 150;
     int currentBalance;
     [SerializeField] TextMeshProUGUI displayBalance;
-    
 
+    private bool canUpgrade = true;
+    
     void Awake()
     {
-        DefenceInfo.OnUpgrade += UpgradeHandler;
+        Actions.OnChangeTower += ChangeTowerHandler;
         currentBalance = startingBalance;
         UpdateDisplay();
     }
 
-    private void OnDestroy()
+    void OnDestroy()
     {
-        DefenceInfo.OnUpgrade -= UpgradeHandler;
-    }
-
-    void UpgradeHandler(int i, int amount)
-    {
-        if (i == 0)
-        {
-            //upgrade => withdraw
-        }
-
-        if (i == 1)
-        {
-            //sell => deposit
-        }
+        Actions.OnChangeTower -= ChangeTowerHandler;
     }
 
     public int CurrentBallance
@@ -60,10 +48,19 @@ public class Bank : MonoBehaviour
         }
     }
 
+    void ChangeTowerHandler(int ammount)
+    {
+        currentBalance += ammount;
+        UpdateDisplay();
+    }
+    
     void UpdateDisplay()
     {
         displayBalance.text = "Gold: " + currentBalance;
     }
-    
+
+
    
+
+
 }
