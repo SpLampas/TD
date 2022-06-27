@@ -12,7 +12,7 @@ public class Bank : MonoBehaviour
     int currentBalance;
     [SerializeField] TextMeshProUGUI displayBalance;
 
-    private bool canUpgrade = true;
+    // private bool canUpgrade = true;
     
     void Awake()
     {

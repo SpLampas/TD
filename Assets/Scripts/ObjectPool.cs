@@ -10,20 +10,24 @@ public class ObjectPool : MonoBehaviour
     [SerializeField] GameObject[] enemyprefab;
     // [Tooltip("Adds amount to maxHitPoints when Enemy dies.")]
     [SerializeField][Range(0.1f, 30f)] float spawnTimer = 1f;
-    // [Tooltip("Adds amount to maxHitPoints when Enemy dies.")]
+    
+    [Tooltip("Number of enemies at the beginning of the stage.")]
     [SerializeField][Range(0,50)] int poolSize = 5;
-    // [Tooltip("Adds amount to maxHitPoints when Enemy dies.")]
+    
+    [Tooltip("Time between spawning waves.")]
     [SerializeField] [Range(1f, 10f)] float timeBetweenWaves = 1f;
 
     [SerializeField] [Range(0, 100)] float enemy1Percentage;
     [SerializeField] [Range(0, 100)] float enemy2Percentage;
     [SerializeField] [Range(0, 100)] float enemy3Percentage;
     
-// [Tooltip("Adds amount to maxHitPoints when Enemy dies.")]
+    [Tooltip("Number of waves need to defeat for Stage Clear.")]
     [SerializeField] [Range(0, 10)] int winCondition = 5;
-    // [Tooltip("Adds amount to maxHitPoints when Enemy dies.")]
+    
+    [Tooltip("Adds extra enemies every wave.")]
     [SerializeField] [Range(0, 10)] int extraEnemiesPerWave = 5;
-    // [Tooltip("Adds amount to maxHitPoints when Enemy dies.")]
+    
+    [Tooltip("Percentage of enemies that if survive, the game is over.")]
     [SerializeField] [Range(0, 1)] float looseCondition = 0.7f;
     
     List<GameObject> pool = new List<GameObject>();
@@ -32,7 +36,7 @@ public class ObjectPool : MonoBehaviour
     
     int activeInSceneCount;
     int enemyReachedEnd = 0;
-    int deadEnemy = 0;
+    // int deadEnemy = 0;
 
     IEnumerator prepareForWave;
     

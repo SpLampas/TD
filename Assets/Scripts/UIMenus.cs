@@ -13,13 +13,15 @@ public class UIMenus : MonoBehaviour
     [SerializeField] GameObject stageCleared;
     [SerializeField] GameObject waves;
     [SerializeField] GameObject notEnoughGold;
+    [SerializeField] GameObject selectAction;
     [SerializeField] TextMeshProUGUI displayWave;
 
     float slowdownFactor =0.05f;
     float slowdownLength = 3f;
 
     IEnumerator coroutine;
-
+    
+    
     Bank bank;
     int sloMoGoldPenalty = 50;
     
@@ -30,6 +32,7 @@ public class UIMenus : MonoBehaviour
         Actions.OnStageClear += StageClearHandler;
         Actions.OnEnemyReached += EnemyReachedHandler;
         Actions.OnNotEnoughGold += NotEnoughGoldHandler;
+        Actions.OnSelectAction += SelectActionHandler;
         Time.timeScale = 1f;
 
     }
@@ -46,6 +49,7 @@ public class UIMenus : MonoBehaviour
         Actions.OnStageClear -= StageClearHandler;
         Actions.OnEnemyReached -= EnemyReachedHandler;
         Actions.OnNotEnoughGold -= NotEnoughGoldHandler;
+        Actions.OnSelectAction -= SelectActionHandler;
     }
 
     void EmptyBankHandler()
@@ -171,5 +175,15 @@ public class UIMenus : MonoBehaviour
     {
         notEnoughGold.SetActive(true);
     }
-    
+
+
+    void SelectActionHandler()
+    {
+        selectAction.gameObject.SetActive(true);
+    }
+
+    public void Upgrade()
+    {
+        Actions.OnUpgradeTower();
+    }
 }

@@ -341,10 +341,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5672325927823913723}
-  - component: {fileID: -1755237937364560541}
   - component: {fileID: 3663007949098276889}
-  - component: {fileID: 2856080962837697459}
   - component: {fileID: 3807989734926708441}
+  - component: {fileID: -1755237937364560541}
+  - component: {fileID: 2856080962837697459}
   m_Layer: 0
   m_Name: Ram
   m_TagString: Untagged
@@ -369,20 +369,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-1755237937364560541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5040643765344069697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c194bced0d4a44e6ba58edf0f66855bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  path: []
-  speed: 1
 --- !u!65 &3663007949098276889
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -396,22 +382,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4, y: 4, z: 4}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &2856080962837697459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5040643765344069697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b518ef9e8f2284a50a654ce63da166e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHitPoints: 5
-  coinParticle: {fileID: 6273532573870499541}
-  currentHitPoints: 0
-  healthBar: {fileID: 112858575}
 --- !u!114 &3807989734926708441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,6 +396,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rewardGold: 25
   penaltyGold: 25
+--- !u!114 &-1755237937364560541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5040643765344069697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c194bced0d4a44e6ba58edf0f66855bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  path: []
+  speed: 1.5
+--- !u!114 &2856080962837697459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5040643765344069697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b518ef9e8f2284a50a654ce63da166e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHitPoints: 7
+  coinParticle: {fileID: 6273532573870499541}
+  currentHitPoints: 0
+  healthBar: {fileID: 112858575}
 --- !u!1001 &3001552513122002613
 PrefabInstance:
   m_ObjectHideFlags: 0

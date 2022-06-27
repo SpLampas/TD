@@ -149,8 +149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7c8ed5d357bd45c289d789ff97a79eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rewardGold: 100
-  penaltyGold: 100
+  rewardGold: 30
+  penaltyGold: 30
 --- !u!114 &1140256780369520887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   path: []
-  speed: 0.5
+  speed: 1.5
 --- !u!114 &1140256780369520886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b518ef9e8f2284a50a654ce63da166e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHitPoints: 10
+  maxHitPoints: 15
   coinParticle: {fileID: 0}
   currentHitPoints: 0
   healthBar: {fileID: 7835675930968083880}
