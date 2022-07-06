@@ -12554,6 +12554,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6596151953931232161, guid: 7420bdc04d9a6451581cf2e245825f7a, type: 3}
+      propertyPath: extraEnemiesPerWave
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6596151953931232161, guid: 7420bdc04d9a6451581cf2e245825f7a, type: 3}
       propertyPath: enemyprefab.Array.data[0]
       value: 
       objectReference: {fileID: 5040643765344069697, guid: b940df629b09f434dbb9fd487257db6c, type: 3}

@@ -15505,7 +15505,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6596151953931232161, guid: 7420bdc04d9a6451581cf2e245825f7a, type: 3}
       propertyPath: winCondition
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6596151953931232161, guid: 7420bdc04d9a6451581cf2e245825f7a, type: 3}
       propertyPath: looseCondition
@@ -15525,6 +15525,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6596151953931232161, guid: 7420bdc04d9a6451581cf2e245825f7a, type: 3}
       propertyPath: timeBetweenWaves
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6596151953931232161, guid: 7420bdc04d9a6451581cf2e245825f7a, type: 3}
+      propertyPath: extraEnemiesPerWave
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6596151953931232161, guid: 7420bdc04d9a6451581cf2e245825f7a, type: 3}

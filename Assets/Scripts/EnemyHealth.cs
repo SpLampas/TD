@@ -52,12 +52,11 @@ public class EnemyHealth : MonoBehaviour
             // Destroy(coinParticle.gameObject,2f);
             // coinParticle.Play();
       
-            
-            gameObject.SetActive(false);
-
+          
             var deadEnemy = 1;
             Actions.OnDeath(deadEnemy);
             enemy.RewardGold(); 
+            gameObject.SetActive(false);
         }
     }
 

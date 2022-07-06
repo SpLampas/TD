@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 public class ObjectPool : MonoBehaviour
 {
     [SerializeField] GameObject[] enemyprefab;
-    // [Tooltip("Adds amount to maxHitPoints when Enemy dies.")]
+    
     [SerializeField][Range(0.1f, 30f)] float spawnTimer = 1f;
     
     [Tooltip("Number of enemies at the beginning of the stage.")]
@@ -35,15 +35,21 @@ public class ObjectPool : MonoBehaviour
     int waveCount = 1;
     
     int activeInSceneCount;
-    int enemyReachedEnd = 0;
-    // int deadEnemy = 0;
+    int enemyReachedEnd;
+   
+    int per1;
+    int per2;
+    int per3;
 
     IEnumerator prepareForWave;
     
     
     void Awake()
     {
-        PopulatePool(poolSize);
+        per1 = CalculatePercentage(poolSize,enemy1Percentage);
+        per2 = CalculatePercentage(poolSize,enemy2Percentage);
+        per3 = CalculatePercentage(poolSize,enemy3Percentage);
+        PopulatePool();
         Actions.OnDeath += OnDeathHandler;
     }
 
@@ -52,6 +58,13 @@ public class ObjectPool : MonoBehaviour
         Actions.OnDeath -= OnDeathHandler;
     }
 
+    
+    void Start()
+    {
+        StartCoroutine(SpawnEnemy());
+        activeInSceneCount = poolSize;
+    }
+    
     void OnDeathHandler(int deathCount)
     {
         if (deathCount == 0)
@@ -60,7 +73,7 @@ public class ObjectPool : MonoBehaviour
         }
         
         activeInSceneCount--;
-     
+
         if (activeInSceneCount == 0)
         {
             prepareForWave = PrepareForWave();
@@ -74,20 +87,13 @@ public class ObjectPool : MonoBehaviour
     }
 
    
-    void Start()
-    {
-        StartCoroutine(SpawnEnemy());
-        activeInSceneCount = poolSize;
-    }
+   
 
  
-    void PopulatePool( int poolSize)
+    void PopulatePool()
     {
-        var per1 = CalculatePercentage(poolSize,enemy1Percentage);
-        var per2 = CalculatePercentage(poolSize,enemy2Percentage);
-        var per3 = CalculatePercentage(poolSize,enemy3Percentage);
-        
-        
+        // Debug.Log($"<color=yellow>POOLSIZE:</color> {poolSize}");
+        // Debug.Log($"<color=green>PER2:</color> {per2}");
         for (int i = 0; i < per1; i++)
         {
             var tempEnemy= Instantiate(enemyprefab[0], transform);
@@ -106,6 +112,7 @@ public class ObjectPool : MonoBehaviour
             tempEnemy.SetActive(false);
             pool.Add(tempEnemy);
         }
+        // Debug.Log($"<color=red>POOL.COUNT:</color> {pool.Count}");
     }
 
     int CalculatePercentage(float size, float percentage)
@@ -116,21 +123,11 @@ public class ObjectPool : MonoBehaviour
 
     IEnumerator SpawnEnemy()
     {
-        for (int i = 0; i < pool.Count; i++)
+        foreach (var enemy in pool)
         {
-            if (!pool[i].activeInHierarchy)
-            {
-                pool[i].SetActive(true);
-            }
-            
+            enemy.SetActive(true);
             yield return new WaitForSeconds(spawnTimer);
         }
-
-        // foreach (var enemy in pool)
-        // {
-        //     enemy.SetActive(true);
-        //     yield return new WaitForSeconds(spawnTimer);
-        // }
     }
 
    
@@ -153,11 +150,10 @@ public class ObjectPool : MonoBehaviour
         enemyReachedEnd = 0;
         waveCount++;
         poolSize += extraEnemiesPerWave;
-        // Debug.Log($"<color=yellow>START WAVE poolSize: </color> {poolSize}");
-        // pool.Clear();
-        PopulatePool(poolSize); 
+        PopulatePool(); 
         StartCoroutine(SpawnEnemy());
-        activeInSceneCount = poolSize;
+        activeInSceneCount = pool.Count;
+        
         
     }
 

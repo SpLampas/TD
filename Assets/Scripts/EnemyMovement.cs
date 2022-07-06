@@ -75,7 +75,6 @@ public class EnemyMovement : MonoBehaviour
     {
         enemy.PenaltyGold();
         var deadEnemy = 0;
-        gameObject.SetActive(false);
         Actions.OnDeath(deadEnemy);
         gameObject.SetActive(false);
     }

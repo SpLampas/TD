@@ -3246,7 +3246,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6596151953931232161, guid: 7420bdc04d9a6451581cf2e245825f7a, type: 3}
       propertyPath: enemy1Percentage
-      value: 100
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6596151953931232161, guid: 7420bdc04d9a6451581cf2e245825f7a, type: 3}
+      propertyPath: enemy2Percentage
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6596151953931232161, guid: 7420bdc04d9a6451581cf2e245825f7a, type: 3}
+      propertyPath: enemy3Percentage
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6596151953931232161, guid: 7420bdc04d9a6451581cf2e245825f7a, type: 3}
       propertyPath: timeBetweenWaves
