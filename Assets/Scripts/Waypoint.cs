@@ -23,8 +23,60 @@ public class Waypoint : MonoBehaviour
         {
             return isPlaceable;
         }
+        set
+        {
+            isPlaceable = value;
+        }
         
     }
+    public bool IsUpgradeable
+    {
+        get
+        {
+            return isUpgradeable;
+        }
+        set
+        {
+            isUpgradeable = value;
+        }
+        
+    }
+
+    
+    void Start()
+    {
+        bank = FindObjectOfType<Bank>();
+    }
+
+
+    void OnMouseDown()
+    {
+        if (!EventSystem.current.IsPointerOverGameObject() && isPlaceable && bank.CurrentBallance >= cost)
+        {
+            Actions.OnConstruction(this,0);
+            return;
+        }
+
+        if (!EventSystem.current.IsPointerOverGameObject() && isUpgradeable)
+        { 
+            Actions.OnSelectAction(this);
+            Actions.OnConstruction(this, 1);
+        }
+    }
+
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // void OnMouseDown()
     // {
     //     if (!EventSystem.current.IsPointerOverGameObject() && isUpgradeable)
@@ -40,37 +92,4 @@ public class Waypoint : MonoBehaviour
     //     }
     //
     // }
-    
-
-    private void Start()
-    {
-        bank = FindObjectOfType<Bank>();
-    }
-
-
-    void OnMouseDown()
-    {
-        if (!EventSystem.current.IsPointerOverGameObject() && isPlaceable && bank.CurrentBallance >= cost)
-        {
-            var pos = transform.position;
-            Actions.OnCreateTower(pos);
-            CreatedTower();
-            return;
-        }
-
-        if (!EventSystem.current.IsPointerOverGameObject() && isUpgradeable)
-        {
-            var pos = transform.position;
-            Actions.OnSelectAction();
-            Actions.OnGetPosition(pos);
-        }
-    }
-
-   
-    void CreatedTower()
-    {
-        isPlaceable = !isPlaceable;
-        isUpgradeable = !isUpgradeable;
-        
-    }
 }

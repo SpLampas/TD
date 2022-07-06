@@ -47,4 +47,5 @@ MonoBehaviour:
   - {fileID: 3219458064393657486, guid: 8a965e088bae16643aab3d07ccfd5e2e, type: 3}
   - {fileID: 6175311001524543682, guid: 132a11f92d9374276945207a48fecb0b, type: 3}
   - {fileID: 4221904747929654160, guid: 2a17e8bb8091146a295c52641704409d, type: 3}
-  cost: 75
+  cost: 4b000000960000002c010000
+  tower: {fileID: 0}

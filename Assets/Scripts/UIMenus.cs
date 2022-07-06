@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class UIMenus : MonoBehaviour
 {
@@ -21,9 +22,13 @@ public class UIMenus : MonoBehaviour
 
     IEnumerator coroutine;
     
-    
     Bank bank;
     int sloMoGoldPenalty = 50;
+
+    int levelReached;
+    int levelToLoad;
+
+    [SerializeField] Button[] levelButtons;
     
     void Awake()
     {
@@ -40,6 +45,16 @@ public class UIMenus : MonoBehaviour
     void Start()
     {
         bank = FindObjectOfType<Bank>();
+        levelReached = PlayerPrefs.GetInt("levelReached",1);
+        levelToLoad = levelReached + 1;
+        for (int i = 0; i < levelButtons.Length; i++)
+        {
+            if (i + 1 > levelReached)
+            {
+                levelButtons[i].interactable = false;
+            }
+            
+        }
     }
 
     void OnDestroy()
@@ -59,6 +74,7 @@ public class UIMenus : MonoBehaviour
 
     void StageClearHandler()
     {
+        PlayerPrefs.SetInt("levelReached", SceneManager.GetActiveScene().buildIndex+1);
         stageCleared.SetActive(true);
     }
 
@@ -177,7 +193,7 @@ public class UIMenus : MonoBehaviour
     }
 
 
-    void SelectActionHandler()
+    void SelectActionHandler(Waypoint waypoint)
     {
         selectAction.gameObject.SetActive(true);
     }
@@ -186,4 +202,9 @@ public class UIMenus : MonoBehaviour
     {
         Actions.OnUpgradeTower();
     }
+    
+    // public void Sell()
+    // {
+    //     Actions.OnSellTower();
+    // }
 }

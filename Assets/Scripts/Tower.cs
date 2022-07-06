@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
+    private int id;
     // [SerializeField] int cost = 75;
     //
     //
@@ -24,5 +26,24 @@ public class Tower : MonoBehaviour
     //
     //     return false;
     // }
-    
+   
+
+    public int SetTowerID()
+    {
+        if (CompareTag("SmallBallista"))
+        {
+            id = 1;
+        }
+
+        if (CompareTag("LargeBallista"))
+        {
+            id = 2;
+        }
+        if(CompareTag("MagicTower"))
+        {
+            id = 3;
+        }
+        return id;
+    }
+
 }

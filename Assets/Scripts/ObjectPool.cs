@@ -83,9 +83,9 @@ public class ObjectPool : MonoBehaviour
  
     void PopulatePool( int poolSize)
     {
-        var per1 = Mathf.RoundToInt(poolSize * (enemy1Percentage/100));
-        var per2 = Mathf.RoundToInt(poolSize * (enemy2Percentage/100));
-        var per3 = Mathf.RoundToInt(poolSize * (enemy3Percentage/100));
+        var per1 = CalculatePercentage(poolSize,enemy1Percentage);
+        var per2 = CalculatePercentage(poolSize,enemy2Percentage);
+        var per3 = CalculatePercentage(poolSize,enemy3Percentage);
         
         
         for (int i = 0; i < per1; i++)
@@ -106,13 +106,16 @@ public class ObjectPool : MonoBehaviour
             tempEnemy.SetActive(false);
             pool.Add(tempEnemy);
         }
-        
     }
 
+    int CalculatePercentage(float size, float percentage)
+    {
+        var value = Mathf.RoundToInt(size * (percentage/100));
+        return value;
+    }
 
     IEnumerator SpawnEnemy()
     {
-        
         for (int i = 0; i < pool.Count; i++)
         {
             if (!pool[i].activeInHierarchy)
@@ -150,7 +153,8 @@ public class ObjectPool : MonoBehaviour
         enemyReachedEnd = 0;
         waveCount++;
         poolSize += extraEnemiesPerWave;
-        pool.Clear();
+        // Debug.Log($"<color=yellow>START WAVE poolSize: </color> {poolSize}");
+        // pool.Clear();
         PopulatePool(poolSize); 
         StartCoroutine(SpawnEnemy());
         activeInSceneCount = poolSize;

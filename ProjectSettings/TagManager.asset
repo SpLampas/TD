@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Path
+  - SmallBallista
+  - LargeBallista
+  - MagicTower
   layers:
   - Default
   - TransparentFX

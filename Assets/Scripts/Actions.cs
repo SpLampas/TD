@@ -12,11 +12,10 @@ public class Actions
    public static Action OnEnemyReached;
    public static Action<int> OnChangeTower;
    public static Action OnNotEnoughGold;
-   public static Action OnSelectAction;
-   public static Action<Vector3> OnCreateTower;
+   public static Action<Waypoint> OnSelectAction;
    public static Action OnUpgradeTower;
-   public static Action OnSellTower;
-   public static Action<Vector3> OnGetPosition;
+   public static Action<Waypoint, int> OnConstruction;
+   // public static Action OnLevelReached;
 
 
 }

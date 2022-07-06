@@ -907,8 +907,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b518ef9e8f2284a50a654ce63da166e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHitPoints: 7
-  coinParticle: {fileID: 0}
+  maxHitPoints: 4
+  coinParticle: {fileID: 2606034198960934942, guid: 1762e5f75fe8b4af1b037cc42108d1b4, type: 3}
   currentHitPoints: 0
   healthBar: {fileID: 7406789882166037882}
 --- !u!114 &5760830281251257254
@@ -924,7 +924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   path: []
-  speed: 3.5
+  speed: 3
 --- !u!1 &5760967892966218543
 GameObject:
   m_ObjectHideFlags: 0
